@@ -105,26 +105,28 @@ public class MainActivity extends AppCompatActivity {
         } );
 
         loginAnonymousbutton = findViewById( R.id.loginAnonymousbutton );
-        loginAnonymousbutton.setOnClickListener( new View.OnClickListener() {        //insert a listener on button that checks whether the button is clicked
+        loginAnonymousbutton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentUser == null) {
+                if (currentUser == null){
                     mAuth.signInAnonymously().
-                            addOnCompleteListener( new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        startActivity( new Intent( getApplicationContext(), HomeActivity.class ) );
-                                    }
-                                }
-                            } )
-                            .addOnFailureListener( new OnFailureListener() {         //if the signin failed
+                            addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task)
+                        {
+                            if (task.isSuccessful())
+                            {         startActivity( new Intent( getApplicationContext(), HomeActivity.class ) );
+                            }
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Log.e( "TAG", e.getMessage() );            //return error in logs
+                                    Log.e("TAG",e.getMessage());
                                 }
-                            } );
-                } else                                            //check if the user is not new
+                            });
+                }
+                else
                 {
                     Toast.makeText( getApplicationContext(), "you are already login anonymously!!!", Toast.LENGTH_LONG ).show();
                 }
